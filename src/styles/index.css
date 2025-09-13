@@ -1,0 +1,160 @@
+/* vk-shell/src/styles/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Electric blue palette — CSS variables for theming (used in tailwind.config) */
+:root {
+  --surface: #f6fbff;
+  --primary-50: #e9f3ff;
+  --primary-100: #d2e9ff;
+  --primary-200: #9ed1ff;
+  --primary-500: #198cff;
+  --primary-700: #1066cc;
+  --accent-start: #3aa0ff;
+  --accent-end: #0066ff;
+  --text: #0b2136;
+}
+
+/* Dark theme overrides */
+:root.dark,
+.dark {
+  --surface: #071025;
+  --primary-50: #081425;
+  --primary-100: #05223f;
+  --primary-200: #054a86;
+  --primary-500: #198cff;
+  --primary-700: #6fb0ff;
+  --accent-start: #4fb3ff;
+  --accent-end: #0b66ff;
+  --text: #e6f0ff;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.995);
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateY(-2px) scale(1.002);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cardLift {
+  0% { transform: translateY(6px) scale(0.996); opacity: 0; }
+  80% { transform: translateY(-2px) scale(1.001); opacity: 0.98; }
+  100% { transform: translateY(0); scale: 1; opacity: 1; }
+}
+
+/* utility classes */
+.animate-fade-in-up {
+  animation: fadeInUp 360ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 260ms ease both;
+}
+
+.animate-card {
+  animation: cardLift 420ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+/* hover micro-interaction for icons and tabs */
+button[class*="rounded-"] {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+button[class*="rounded-"]:hover {
+  transform: translateY(-3px);
+}
+
+/* App shell */
+.app-shell {
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header alignment */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;        /* добавляем паддинги сверху и сбоку */
+  margin-bottom: 1.5rem;     /* небольшой отступ от контента */
+  background: transparent;   /* фон пусть остаётся прозрачным */
+  z-index: 50;
+}
+
+/* Card visual */
+.app-card {
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(6, 30, 77, 0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.5));
+}
+
+/* Launcher specifics */
+.launcher .hero {
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+/* App tiles */
+.launcher article {
+  min-height: 88px;
+}
+
+/* Focus outline */
+:focus {
+  outline: 3px solid rgba(25, 140, 255, 0.18);
+  outline-offset: 2px;
+}
+
+/* scrollbar helper */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Responsive (desktop only) */
+@media (min-width: 1024px) {
+  .launcher .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.launcher h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.launcher .grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* star button */
+button[title*="избран"] {
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+button[title*="избран"]:hover {
+  transform: scale(1.03);
+}
+
+/* small responsiveness */
+@media (max-width: 1280px) {
+  .launcher .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
